@@ -118,7 +118,7 @@ async def generate_dashboard(user_id: int) -> str:
             emoji = MISSION_EMOJIS.get(mission['type'], '📝')
             dashboard += f"• {emoji} {mission['title']} - {status}\n"
     else:
-        dashboard += "No missions for today. Add some!\n"
+        dashboard += "Сегодня нет миссий. Добавьте некоторые!\n"
     
     # Active timer info
     if active_timer:
@@ -134,7 +134,7 @@ async def generate_dashboard(user_id: int) -> str:
             total_minutes = data.get('total_minutes', 0)
             dashboard += f"• {emoji} {mission_type.title()}: {completion_rate}% ({total_minutes} min)\n"
     else:
-        dashboard += "No data available yet.\n"
+        dashboard += "Данные пока не доступны.\n"
     
     dashboard += f"\n💡 <i>{SCIENCE_DATA['sleep']['motivational_quote']}</i>"
     
@@ -146,7 +146,7 @@ async def generate_missions_list(user_id: int) -> str:
     missions = db.get_todays_missions(user_id)
     
     if not missions:
-        return "🎯 <b>No missions for today!</b>\n\nYour AI guardian can create missions to help you optimize your life."
+        return "🎯 <b>Сегодня нет миссий!</b>\n\nВаш AI-страж может создать миссии, чтобы помочь вам оптимизировать вашу жизнь."
     
     missions_text = "🎯 <b>Миссии дня:</b>\n\n"
     for i, mission in enumerate(missions, 1):
@@ -170,7 +170,7 @@ async def generate_weekly_analytics(user_id: int) -> str:
     analytics = db.get_weekly_analytics(user_id)
     
     if not analytics:
-        return "📈 <b>Недельная аналитика</b>\n\nNo data available yet. Complete some missions to see your progress!"
+        return "📈 <b>Недельная аналитика</b>\n\nДанные пока не доступны. Выполните несколько миссий, чтобы увидеть свой прогресс!"
     
     analytics_text = "📈 <b>Отчет по недельной аналитике</b>\n\n"
     
@@ -281,12 +281,12 @@ async def cmd_start(message: Message):
     
     welcome_message = (
         f"🤖 <b>Добро пожаловать в LifeOS Guardian!</b>\n\n"
-        f"Your personal AI assistant for optimizing life based on scientific research from "
-        f"Mayo Clinic, Harvard, and Stanford.\n\n"
-        f"🎯 Track your daily missions\n"
-        f"📊 Monitor your weekly progress\n"
-        f"🔬 Learn science-backed insights\n\n"
-        f"Select an option below to begin:"
+        f"Ваш персональный AI-ассистент для оптимизации жизни на основе научных "
+        f"исследований из Mayo Clinic, Гарвардского университета и Стэнфорда.\n\n"
+        f"🎯 Отслеживайте свои ежедневные миссии\n"
+        f"📊 Мониторьте свой недельный прогресс\n"
+        f"🔬 Изучайте научно обоснованные инсайты\n\n"
+        f"Выберите один из вариантов ниже, чтобы начать:"
     )
     
     await message.answer(welcome_message, reply_markup=create_main_menu_keyboard())

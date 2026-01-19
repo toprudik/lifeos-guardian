@@ -1,33 +1,33 @@
-"""Configuration module for LifeOS Guardian with scientific data"""
+"""Конфигурационный модуль для LifeOS Guardian с научными данными"""
 
-# Scientific research-based recommendations from Mayo Clinic, Harvard, Stanford
+# Научно обоснованные рекомендации от Mayo Clinic, Гарвардского университета, Стэнфорда
 SCIENCE_DATA = {
     "sleep": {
         "optimal_hours": 7.5,
-        "deep_sleep_percentage": 13,  # 13-23% of total sleep
-        "rem_sleep_percentage": 20,   # 20-25% of total sleep
+        "deep_sleep_percentage": 13,  # 13-23% от общего сна
+        "rem_sleep_percentage": 20,   # 20-25% от общего сна
         "benefits": [
             "Улучшенная консолидация памяти",
             "Повышенная функция иммунитета",
             "Лучшая эмоциональная регуляция",
             "Снижение риска хронических заболеваний"
         ],
-        "motivational_quote": "Sleep is the best meditation. - Dalai Lama"
+        "motivational_quote": "Сон - это лучшая медитация. - Далай Лама"
     },
     "exercise": {
         "daily_minutes": 30,
-        "cardio_frequency": 5,  # days per week
-        "strength_training_frequency": 2,  # days per week
+        "cardio_frequency": 5,  # дней в неделю
+        "strength_training_frequency": 2,  # дней в неделю
         "benefits": [
             "Снижение риска сердечных заболеваний на 35%",
             "Улучшение настроения и снижение тревожности",
             "Повышение когнитивной функции",
             "Помощь в поддержании здорового веса"
         ],
-        "motivational_quote": "Take care of your body. It's the only place you have to live. - Jim Rohn"
+        "motivational_quote": "Берегите свое тело. Это единственный дом, который у вас есть. - Джим Рон"
     },
     "family": {
-        "quality_time_hours": 2,  # per day minimum
+        "quality_time_hours": 2,  # минимум в день
         "connection_importance": "Strong family relationships improve longevity and mental health",
         "benefits": [
             "Повышенное чувство принадлежности",
@@ -35,22 +35,22 @@ SCIENCE_DATA = {
             "Улучшенное эмоциональное благополучие",
             "Более продолжительная жизнь"
         ],
-        "motivational_quote": "Family isn't always blood. It's the people in your life who want you in theirs. - Maya Angelou"
+        "motivational_quote": "Семья - это не всегда родные. Это люди в вашей жизни, которые хотят быть с вами. - Майя Энджелоу"
     },
     "deep_work": {
-        "focus_blocks": 90,  # minutes per block
-        "optimal_sessions_per_day": 2,  # max effective sessions
-        "break_duration": 15,  # minutes between focus blocks
+        "focus_blocks": 90,  # минут на блок
+        "optimal_sessions_per_day": 2,  # максимальное количество эффективных сессий
+        "break_duration": 15,  # минут между блоками фокусировки
         "benefits": [
             "Повышенная продуктивность и концентрация",
             "Лучшее качество производимой работы",
             "Сниженная умственная усталость со временем",
             "Улучшенное развитие навыков"
         ],
-        "motivational_quote": "Deep work is an ability to focus intensely on cognitively demanding activities. - Cal Newport"
+        "motivational_quote": "Глубокая работа - это способность интенсивно концентрироваться на когнитивно сложных задачах. - Кал Ньюпорт"
     },
     "hydration": {
-        "daily_liters": 2.7,  # for women, 3.7 for men
+        "daily_liters": 2.7,  # для женщин, 3.7 для мужчин
         "water_percentage_body": 60,
         "signs_dehydration": ["усталость", "головная боль", "плохая концентрация"],
         "benefits": [
@@ -59,18 +59,18 @@ SCIENCE_DATA = {
             "Помощь в регулировании температуры",
             "Способствует ясности мышления"
         ],
-        "motivational_quote": "Water is the driving force of all nature. - Leonardo da Vinci"
+        "motivational_quote": "Вода - движущая сила всей природы. - Леонардо да Винчи"
     }
 }
 
-# Personal goals for toprudik
+# Персональные цели для toprudik
 PERSONAL_GOALS = {
     "toprudik": {
-        "sleep_target": 8,  # hours per night
-        "exercise_target": 45,  # minutes per day
-        "family_time_target": 3,  # hours per day
-        "deep_work_target": 120,  # minutes per day (2 sessions of 60 min)
-        "hydration_target": 3.0,  # liters per day
+        "sleep_target": 8,  # часов в ночь
+        "exercise_target": 45,  # минут в день
+        "family_time_target": 3,  # часов в день
+        "deep_work_target": 120,  # минут в день (2 сессии по 60 мин)
+        "hydration_target": 3.0,  # литров в день
         "weekly_exercise_days": 5,
         "weekly_family_days": 7,
         "weekly_deep_work_days": 5

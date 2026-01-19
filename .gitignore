@@ -15,6 +15,9 @@ venv/
 .ENV.*
 .venv.bak/
 env.bak/
+.env
+.env copy
+
 
 # Logs
 *.log

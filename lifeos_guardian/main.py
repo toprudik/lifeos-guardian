@@ -46,10 +46,10 @@ def create_main_menu_keyboard():
     """Create main menu keyboard with emoji buttons"""
     keyboard = InlineKeyboardBuilder()
     
-    keyboard.button(text="📊 Dashboard", callback_data="dashboard")
-    keyboard.button(text="🎯 Today's Missions", callback_data="missions")
-    keyboard.button(text="📈 Weekly Analytics", callback_data="analytics")
-    keyboard.button(text="📖 Science Facts", callback_data="science_facts")
+    keyboard.button(text="📊 Дашборд", callback_data="dashboard")
+    keyboard.button(text="🎯 Миссии дня", callback_data="missions")
+    keyboard.button(text="📈 Недельная аналитика", callback_data="analytics")
+    keyboard.button(text="📖 Научные факты", callback_data="science_facts")
     
     keyboard.adjust(2)  # 2 buttons per row
     return keyboard.as_markup()
@@ -60,7 +60,7 @@ def create_missions_keyboard(missions: List[Dict]):
     keyboard = InlineKeyboardBuilder()
     
     for mission in missions:
-        status = "⏱️ Active" if mission.get('is_active') else "▶️ Start"
+        status = "⏱️ Активна" if mission.get('is_active') else "▶️ Start"
         button_text = f"{MISSION_EMOJIS.get(mission['type'], '📝')} {mission['title']} - {status}"
         
         if mission.get('is_active'):
@@ -114,7 +114,7 @@ async def generate_dashboard(user_id: int) -> str:
     dashboard += "<b>Today's Missions:</b>\n"
     if missions:
         for mission in missions:
-            status = "✅ Active" if mission.get('is_active') else "⏳ Pending"
+            status = "✅ Активна" if mission.get('is_active') else "⏳ В ожидании"
             emoji = MISSION_EMOJIS.get(mission['type'], '📝')
             dashboard += f"• {emoji} {mission['title']} - {status}\n"
     else:
@@ -148,9 +148,9 @@ async def generate_missions_list(user_id: int) -> str:
     if not missions:
         return "🎯 <b>No missions for today!</b>\n\nYour AI guardian can create missions to help you optimize your life."
     
-    missions_text = "🎯 <b>Today's Missions:</b>\n\n"
+    missions_text = "🎯 <b>Миссии дня:</b>\n\n"
     for i, mission in enumerate(missions, 1):
-        status = "⏱️ Active" if mission.get('is_active') else "⏳ Pending"
+        status = "⏱️ Активна" if mission.get('is_active') else "⏳ В ожидании"
         emoji = MISSION_EMOJIS.get(mission['type'], '📝')
         duration = mission.get('target_duration', 0)
         
@@ -170,9 +170,9 @@ async def generate_weekly_analytics(user_id: int) -> str:
     analytics = db.get_weekly_analytics(user_id)
     
     if not analytics:
-        return "📈 <b>Weekly Analytics</b>\n\nNo data available yet. Complete some missions to see your progress!"
+        return "📈 <b>Недельная аналитика</b>\n\nNo data available yet. Complete some missions to see your progress!"
     
-    analytics_text = "📈 <b>Weekly Analytics Report</b>\n\n"
+    analytics_text = "📈 <b>Отчет по недельной аналитике</b>\n\n"
     
     for mission_type, data in analytics.items():
         emoji = MISSION_EMOJIS.get(mission_type, '❓')
@@ -197,17 +197,17 @@ async def generate_science_fact(category: str) -> str:
     data = SCIENCE_DATA[category]
     emoji = MISSION_EMOJIS.get(category, '❓')
     
-    fact_text = f"{emoji} <b>Scientific Insights: {category.replace('_', ' ').title()}</b>\n\n"
+    fact_text = f"{emoji} <b>Научные данные: {category.replace('_', ' ').title()}</b>\n\n"
     
     if 'optimal_hours' in data:
-        fact_text += f"🔬 <b>Optimal Amount:</b> {data['optimal_hours']} hours\n"
+        fact_text += f"🔬 <b>Оптимальное количество:</b> {data['optimal_hours']} hours\n"
     elif 'daily_minutes' in data:
-        fact_text += f"🔬 <b>Daily Recommendation:</b> {data['daily_minutes']} minutes\n"
+        fact_text += f"🔬 <b>Рекомендация в день:</b> {data['daily_minutes']} minutes\n"
     elif 'daily_liters' in data:
-        fact_text += f"🔬 <b>Daily Recommendation:</b> {data['daily_liters']} liters\n"
+        fact_text += f"🔬 <b>Рекомендация в день:</b> {data['daily_liters']} liters\n"
     
     if 'benefits' in data:
-        fact_text += f"\n🌟 <b>Key Benefits:</b>\n"
+        fact_text += f"\n🌟 <b>Основные преимущества:</b>\n"
         for benefit in data['benefits']:
             fact_text += f"   • {benefit}\n"
     
@@ -280,7 +280,7 @@ async def cmd_start(message: Message):
     initialize_daily_missions(user['id'])
     
     welcome_message = (
-        f"🤖 <b>Welcome to LifeOS Guardian!</b>\n\n"
+        f"🤖 <b>Добро пожаловать в LifeOS Guardian!</b>\n\n"
         f"Your personal AI assistant for optimizing life based on scientific research from "
         f"Mayo Clinic, Harvard, and Stanford.\n\n"
         f"🎯 Track your daily missions\n"
@@ -342,7 +342,7 @@ async def start_timer(callback: CallbackQuery):
     success = db.start_timer(user['id'], mission_id)
     
     if success:
-        await callback.answer("✅ Timer started successfully!", show_alert=True)
+        await callback.answer("✅ Таймер успешно запущен!", show_alert=True)
     else:
         await callback.answer("⚠️ Timer already active for this mission!", show_alert=True)
     
@@ -365,7 +365,7 @@ async def stop_timer(callback: CallbackQuery):
     success = db.complete_timer(timer_id)
     
     if success:
-        await callback.answer("✅ Timer stopped and recorded!", show_alert=True)
+        await callback.answer("✅ Таймер остановлен и записан!", show_alert=True)
     else:
         await callback.answer("⚠️ Could not stop timer. Already completed or invalid.", show_alert=True)
     
@@ -399,7 +399,7 @@ async def show_analytics(callback: CallbackQuery):
 async def show_science_facts(callback: CallbackQuery):
     """Show science facts menu"""
     await callback.message.edit_text(
-        "🔬 <b>Science-Backed Insights</b>\n\n"
+        "🔬 <b>Научно обоснованные выводы</b>\n\n"
         "Choose a category to learn evidence-based recommendations:",
         reply_markup=create_science_facts_keyboard(),
         parse_mode="HTML"

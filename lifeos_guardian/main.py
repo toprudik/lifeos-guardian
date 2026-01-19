@@ -46,10 +46,10 @@ def create_main_menu_keyboard():
     """Create main menu keyboard with emoji buttons"""
     keyboard = InlineKeyboardBuilder()
     
-    keyboard.button(text="📊 Dashboard", callback_data="dashboard")
-    keyboard.button(text="🎯 Today's Missions", callback_data="missions")
-    keyboard.button(text="📈 Weekly Analytics", callback_data="analytics")
-    keyboard.button(text="📖 Science Facts", callback_data="science_facts")
+    keyboard.button(text="📊 Дашборд", callback_data="dashboard")
+    keyboard.button(text="🎯 Миссии дня", callback_data="missions")
+    keyboard.button(text="📈 Недельная аналитика", callback_data="analytics")
+    keyboard.button(text="📖 Научные факты", callback_data="science_facts")
     
     keyboard.adjust(2)  # 2 buttons per row
     return keyboard.as_markup()
@@ -60,23 +60,23 @@ def create_missions_keyboard(missions: List[Dict]):
     keyboard = InlineKeyboardBuilder()
     
     for mission in missions:
-        status = "⏱️ Active" if mission.get('is_active') else "▶️ Start"
+        status = "⏱️ Активна" if mission.get('is_active') else "▶️ Запустить"
         button_text = f"{MISSION_EMOJIS.get(mission['type'], '📝')} {mission['title']} - {status}"
         
         if mission.get('is_active'):
             # Show stop button for active mission
             keyboard.button(
-                text=f"⏹️ Stop {MISSION_EMOJIS.get(mission['type'], '📝')}", 
+                text=f"⏹️ Остановить {MISSION_EMOJIS.get(mission['type'], '📝')}", 
                 callback_data=f"stop_timer_{mission['id']}"
             )
         else:
             # Show start button for inactive mission
             keyboard.button(
-                text=f"▶️ Start {MISSION_EMOJIS.get(mission['type'], '📝')}", 
+                text=f"▶️ Запустить {MISSION_EMOJIS.get(mission['type'], '📝')}", 
                 callback_data=f"start_timer_{mission['id']}"
             )
     
-    keyboard.button(text="🔙 Back to Menu", callback_data="main_menu")
+    keyboard.button(text="🔙 Назад в меню", callback_data="main_menu")
     keyboard.adjust(1)  # 1 button per row
     return keyboard.as_markup()
 
@@ -88,11 +88,11 @@ def create_science_facts_keyboard():
     for category, data in SCIENCE_DATA.items():
         emoji = MISSION_EMOJIS.get(category, '❓')
         keyboard.button(
-            text=f"{emoji} {category.replace('_', ' ').title()} Facts", 
+            text=f"{emoji} {category.replace('_', ' ').title()} Факты", 
             callback_data=f"science_{category}"
         )
     
-    keyboard.button(text="🔙 Back to Menu", callback_data="main_menu")
+    keyboard.button(text="🔙 Назад в меню", callback_data="main_menu")
     keyboard.adjust(1)
     return keyboard.as_markup()
 
@@ -108,33 +108,33 @@ async def generate_dashboard(user_id: int) -> str:
     # Get weekly analytics
     weekly_analytics = db.get_weekly_analytics(user_id)
     
-    dashboard = "🏠 <b>LIFEOS GUARDIAN DASHBOARD</b>\n\n"
+    dashboard = "🏠 <b>LIFEOS GUARDIAN ДАШБОРД</b>\n\n"
     
     # Today's missions
-    dashboard += "<b>Today's Missions:</b>\n"
+    dashboard += "<b>Миссии дня:</b>\n"
     if missions:
         for mission in missions:
-            status = "✅ Active" if mission.get('is_active') else "⏳ Pending"
+            status = "✅ Активна" if mission.get('is_active') else "⏳ В ожидании"
             emoji = MISSION_EMOJIS.get(mission['type'], '📝')
             dashboard += f"• {emoji} {mission['title']} - {status}\n"
     else:
-        dashboard += "No missions for today. Add some!\n"
+        dashboard += "Нет миссий на сегодня. Добавьте какие-нибудь!\n"
     
     # Active timer info
     if active_timer:
-        dashboard += f"\n<b>Active Timer:</b>\n"
-        dashboard += f"⏱️ {active_timer['mission_title']} - {active_timer['elapsed_minutes']} min elapsed\n"
+        dashboard += f"\n<b>Активный таймер:</b>\n"
+        dashboard += f"⏱️ {active_timer['mission_title']} - {active_timer['elapsed_minutes']} мин прошло\n"
     
     # Weekly analytics summary
-    dashboard += f"\n<b>Weekly Progress:</b>\n"
+    dashboard += f"\n<b>Недельный прогресс:</b>\n"
     if weekly_analytics:
         for mission_type, data in weekly_analytics.items():
             emoji = MISSION_EMOJIS.get(mission_type, '❓')
             completion_rate = data.get('completion_rate', 0)
             total_minutes = data.get('total_minutes', 0)
-            dashboard += f"• {emoji} {mission_type.title()}: {completion_rate}% ({total_minutes} min)\n"
+            dashboard += f"• {emoji} {mission_type.title()}: {completion_rate}% ({total_minutes} мин)\n"
     else:
-        dashboard += "No data available yet.\n"
+        dashboard += "Данные пока недоступны.\n"
     
     dashboard += f"\n💡 <i>{SCIENCE_DATA['sleep']['motivational_quote']}</i>"
     
@@ -146,20 +146,20 @@ async def generate_missions_list(user_id: int) -> str:
     missions = db.get_todays_missions(user_id)
     
     if not missions:
-        return "🎯 <b>No missions for today!</b>\n\nYour AI guardian can create missions to help you optimize your life."
+        return "🎯 <b>Нет миссий на сегодня!</b>\n\nВаш ИИ-страж может создать миссии для оптимизации вашей жизни."
     
-    missions_text = "🎯 <b>Today's Missions:</b>\n\n"
+    missions_text = "🎯 <b>Миссии дня:</b>\n\n"
     for i, mission in enumerate(missions, 1):
-        status = "⏱️ Active" if mission.get('is_active') else "⏳ Pending"
+        status = "⏱️ Активна" if mission.get('is_active') else "⏳ В ожидании"
         emoji = MISSION_EMOJIS.get(mission['type'], '📝')
         duration = mission.get('target_duration', 0)
         
         missions_text += f"<b>{i}. {emoji} {mission['title']}</b>\n"
-        missions_text += f"   • Type: {mission['type'].replace('_', ' ').title()}\n"
-        missions_text += f"   • Target: {duration} min\n"
-        missions_text += f"   • Status: {status}\n"
+        missions_text += f"   • Тип: {mission['type'].replace('_', ' ').title()}\n"
+        missions_text += f"   • Цель: {duration} мин\n"
+        missions_text += f"   • Статус: {status}\n"
         if mission.get('duration_minutes'):
-            missions_text += f"   • Current: {mission['duration_minutes']} min\n"
+            missions_text += f"   • Текущее: {mission['duration_minutes']} мин\n"
         missions_text += "\n"
     
     return missions_text
@@ -170,9 +170,9 @@ async def generate_weekly_analytics(user_id: int) -> str:
     analytics = db.get_weekly_analytics(user_id)
     
     if not analytics:
-        return "📈 <b>Weekly Analytics</b>\n\nNo data available yet. Complete some missions to see your progress!"
+        return "📈 <b>Недельная аналитика</b>\n\nДанные пока недоступны. Выполните несколько миссий, чтобы увидеть свой прогресс!"
     
-    analytics_text = "📈 <b>Weekly Analytics Report</b>\n\n"
+    analytics_text = "📈 <b>Отчет по недельной аналитике</b>\n\n"
     
     for mission_type, data in analytics.items():
         emoji = MISSION_EMOJIS.get(mission_type, '❓')
@@ -182,9 +182,9 @@ async def generate_weekly_analytics(user_id: int) -> str:
         completion_rate = data.get('completion_rate', 0)
         
         analytics_text += f"<b>{emoji} {mission_type.replace('_', ' ').title()}</b>\n"
-        analytics_text += f"   • Total Time: {total_minutes} min\n"
-        analytics_text += f"   • Completed: {completed_sessions}/{planned_sessions} sessions\n"
-        analytics_text += f"   • Completion Rate: {completion_rate}%\n\n"
+        analytics_text += f"   • Общее время: {total_minutes} мин\n"
+        analytics_text += f"   • Выполнено: {completed_sessions}/{planned_sessions} сессий\n"
+        analytics_text += f"   • Процент выполнения: {completion_rate}%\n\n"
     
     return analytics_text
 
@@ -192,22 +192,22 @@ async def generate_weekly_analytics(user_id: int) -> str:
 async def generate_science_fact(category: str) -> str:
     """Generate science fact for a specific category"""
     if category not in SCIENCE_DATA:
-        return f"❌ No science data found for {category}"
+        return f"❌ Научные данные не найдены для {category}"
     
     data = SCIENCE_DATA[category]
     emoji = MISSION_EMOJIS.get(category, '❓')
     
-    fact_text = f"{emoji} <b>Scientific Insights: {category.replace('_', ' ').title()}</b>\n\n"
+    fact_text = f"{emoji} <b>Научные инсайты: {category.replace('_', ' ').title()}</b>\n\n"
     
     if 'optimal_hours' in data:
-        fact_text += f"🔬 <b>Optimal Amount:</b> {data['optimal_hours']} hours\n"
+        fact_text += f"🔬 <b>Оптимальное количество:</b> {data['optimal_hours']} часов\n"
     elif 'daily_minutes' in data:
-        fact_text += f"🔬 <b>Daily Recommendation:</b> {data['daily_minutes']} minutes\n"
+        fact_text += f"🔬 <b>Рекомендация в день:</b> {data['daily_minutes']} минут\n"
     elif 'daily_liters' in data:
-        fact_text += f"🔬 <b>Daily Recommendation:</b> {data['daily_liters']} liters\n"
+        fact_text += f"🔬 <b>Рекомендация в день:</b> {data['daily_liters']} литров\n"
     
     if 'benefits' in data:
-        fact_text += f"\n🌟 <b>Key Benefits:</b>\n"
+        fact_text += f"\n🌟 <b>Ключевые преимущества:</b>\n"
         for benefit in data['benefits']:
             fact_text += f"   • {benefit}\n"
     
@@ -280,13 +280,13 @@ async def cmd_start(message: Message):
     initialize_daily_missions(user['id'])
     
     welcome_message = (
-        f"🤖 <b>Welcome to LifeOS Guardian!</b>\n\n"
-        f"Your personal AI assistant for optimizing life based on scientific research from "
-        f"Mayo Clinic, Harvard, and Stanford.\n\n"
-        f"🎯 Track your daily missions\n"
-        f"📊 Monitor your weekly progress\n"
-        f"🔬 Learn science-backed insights\n\n"
-        f"Select an option below to begin:"
+        f"🤖 <b>Добро пожаловать в LifeOS Guardian!</b>\n\n"
+        f"Ваш персональный ИИ-ассистент для оптимизации жизни на основе научных исследований "
+        f"из Mayo Clinic, Harvard и Stanford.\n\n"
+        f"🎯 Отслеживайте ежедневные миссии\n"
+        f"📊 Мониторьте ваш недельный прогресс\n"
+        f"🔬 Изучайте научно-обоснованные инсайты\n\n"
+        f"Выберите опцию ниже, чтобы начать:"
     )
     
     await message.answer(welcome_message, reply_markup=create_main_menu_keyboard())
@@ -296,7 +296,7 @@ async def cmd_start(message: Message):
 async def show_main_menu(callback: CallbackQuery):
     """Show main menu"""
     await callback.message.edit_text(
-        "🏠 <b>Main Menu</b>\n\nSelect an option:",
+        "🏠 <b>Главное меню</b>\n\nВыберите опцию:",
         reply_markup=create_main_menu_keyboard()
     )
     await callback.answer()
@@ -342,9 +342,9 @@ async def start_timer(callback: CallbackQuery):
     success = db.start_timer(user['id'], mission_id)
     
     if success:
-        await callback.answer("✅ Timer started successfully!", show_alert=True)
+        await callback.answer("✅ Таймер успешно запущен!", show_alert=True)
     else:
-        await callback.answer("⚠️ Timer already active for this mission!", show_alert=True)
+        await callback.answer("⚠️ Таймер уже активен для этой миссии!", show_alert=True)
     
     # Refresh missions display
     missions_text = await generate_missions_list(user['id'])
@@ -365,9 +365,9 @@ async def stop_timer(callback: CallbackQuery):
     success = db.complete_timer(timer_id)
     
     if success:
-        await callback.answer("✅ Timer stopped and recorded!", show_alert=True)
+        await callback.answer("✅ Таймер остановлен и записан!", show_alert=True)
     else:
-        await callback.answer("⚠️ Could not stop timer. Already completed or invalid.", show_alert=True)
+        await callback.answer("⚠️ Не удалось остановить таймер. Уже завершен или неверный.", show_alert=True)
     
     # Refresh missions display
     user = db.get_or_create_user(callback.from_user.id, callback.from_user.username)
@@ -399,8 +399,8 @@ async def show_analytics(callback: CallbackQuery):
 async def show_science_facts(callback: CallbackQuery):
     """Show science facts menu"""
     await callback.message.edit_text(
-        "🔬 <b>Science-Backed Insights</b>\n\n"
-        "Choose a category to learn evidence-based recommendations:",
+        "🔬 <b>Научно-обоснованные инсайты</b>\n\n"
+        "Выберите категорию, чтобы узнать рекомендации, подтвержденные исследованиями:",
         reply_markup=create_science_facts_keyboard(),
         parse_mode="HTML"
     )
@@ -414,8 +414,8 @@ async def show_specific_science_fact(callback: CallbackQuery):
     fact_text = await generate_science_fact(category)
     
     keyboard = InlineKeyboardBuilder()
-    keyboard.button(text="🔙 Back to Science Facts", callback_data="science_facts")
-    keyboard.button(text="🏠 Main Menu", callback_data="main_menu")
+    keyboard.button(text="🔙 Назад к научным фактам", callback_data="science_facts")
+    keyboard.button(text="🏠 Главное меню", callback_data="main_menu")
     keyboard.adjust(1)
     
     await callback.message.edit_text(

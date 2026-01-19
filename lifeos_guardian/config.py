@@ -28,7 +28,7 @@ SCIENCE_DATA = {
     },
     "family": {
         "quality_time_hours": 2,  # минимум в день
-        "connection_importance": "Strong family relationships improve longevity and mental health",
+        "connection_importance": "Сильные семейные связи улучшают долголетие и психическое здоровье",
         "benefits": [
             "Повышенное чувство принадлежности",
             "Лучшее управление стрессом",
@@ -77,7 +77,7 @@ PERSONAL_GOALS = {
     }
 }
 
-# Mission types and their corresponding emoji
+# Типы миссий и соответствующие им эмодзи
 MISSION_EMOJIS = {
     "sleep": "😴",
     "exercise": "💪",
@@ -86,7 +86,7 @@ MISSION_EMOJIS = {
     "hydration": "💧"
 }
 
-# Default mission titles and descriptions
+# Заголовки и описания миссий по умолчанию
 MISSION_TITLES = {
     "sleep": "Хорошо выспаться сегодня ночью",
     "exercise": "Двигать телом",

@@ -1,39 +1,59 @@
 ```
-# Environment variables
-.env
-.env.local
-.env.*
+# Database files
+*.db
 
-# Dependencies
-.venv/
-venv/
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.egg-info/
-dist/
-build/
-*.so
-*.dylib
-*.dll
+.Python
+env/
+venv/
+.venv/
+.ENV
+.ENV.*
+.venv.bak/
+env.bak/
 
 # Logs
 *.log
 
-# Editor/IDE
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *.tmp
 
+# OS
+.DS_Store
+Thumbs.db
+
 # Coverage
 .coverage
 coverage/
 htmlcov/
 
-# OS
-.DS_Store
-Thumbs.db
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing
+.pytest_cache/
+.mypy_cache/
 ```

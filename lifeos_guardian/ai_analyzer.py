@@ -3,6 +3,9 @@
 import random
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from config import SCIENCE_DATA
 
 
@@ -123,7 +126,7 @@ class AIAnalyzer:
         correlations = []
         if sleep_hours < 6 and work_hours > 8:
             correlations.append("недостаток сна → снижение продуктивности на работе")
-        if exercise_time < 2 and energy_level < 6:
+        if exercise_time < 2 and user_metrics.get('energy', {}).get('level', 5) < 6:
             correlations.append("недостаток физической активности → низкий уровень энергии")
             
         # Generate micro-habit suggestion for the weakest area
@@ -414,3 +417,7 @@ class AIAnalyzer:
         tip = random.choice(self.scientific_facts[random_category])
         
         return f"🔬 СОВЕТ ОТ НАУКИ (сегодня):\n{tip}"
+
+
+# Create a global instance
+ai_analyzer = AIAnalyzer()

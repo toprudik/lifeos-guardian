@@ -7,10 +7,10 @@ SCIENCE_DATA = {
         "deep_sleep_percentage": 13,  # 13-23% of total sleep
         "rem_sleep_percentage": 20,   # 20-25% of total sleep
         "benefits": [
-            "Improved memory consolidation",
-            "Enhanced immune function",
-            "Better emotional regulation",
-            "Reduced risk of chronic diseases"
+            "Улучшенная консолидация памяти",
+            "Повышенная функция иммунитета",
+            "Лучшая эмоциональная регуляция",
+            "Снижение риска хронических заболеваний"
         ],
         "motivational_quote": "Sleep is the best meditation. - Dalai Lama"
     },
@@ -19,10 +19,10 @@ SCIENCE_DATA = {
         "cardio_frequency": 5,  # days per week
         "strength_training_frequency": 2,  # days per week
         "benefits": [
-            "Reduces risk of heart disease by 35%",
-            "Improves mood and reduces anxiety",
-            "Boosts cognitive function",
-            "Helps maintain healthy weight"
+            "Снижение риска сердечных заболеваний на 35%",
+            "Улучшение настроения и снижение тревожности",
+            "Повышение когнитивной функции",
+            "Помощь в поддержании здорового веса"
         ],
         "motivational_quote": "Take care of your body. It's the only place you have to live. - Jim Rohn"
     },
@@ -30,10 +30,10 @@ SCIENCE_DATA = {
         "quality_time_hours": 2,  # per day minimum
         "connection_importance": "Strong family relationships improve longevity and mental health",
         "benefits": [
-            "Increased sense of belonging",
-            "Better stress management",
-            "Improved emotional well-being",
-            "Longer life expectancy"
+            "Повышенное чувство принадлежности",
+            "Лучшее управление стрессом",
+            "Улучшенное эмоциональное благополучие",
+            "Более продолжительная жизнь"
         ],
         "motivational_quote": "Family isn't always blood. It's the people in your life who want you in theirs. - Maya Angelou"
     },
@@ -42,22 +42,22 @@ SCIENCE_DATA = {
         "optimal_sessions_per_day": 2,  # max effective sessions
         "break_duration": 15,  # minutes between focus blocks
         "benefits": [
-            "Enhanced productivity and concentration",
-            "Better quality of work produced",
-            "Reduced mental fatigue over time",
-            "Improved skill development"
+            "Повышенная продуктивность и концентрация",
+            "Лучшее качество производимой работы",
+            "Сниженная умственная усталость со временем",
+            "Улучшенное развитие навыков"
         ],
         "motivational_quote": "Deep work is an ability to focus intensely on cognitively demanding activities. - Cal Newport"
     },
     "hydration": {
         "daily_liters": 2.7,  # for women, 3.7 for men
         "water_percentage_body": 60,
-        "signs_dehydration": ["fatigue", "headache", "poor concentration"],
+        "signs_dehydration": ["усталость", "головная боль", "плохая концентрация"],
         "benefits": [
-            "Maintains energy levels",
-            "Supports kidney function",
-            "Aids in temperature regulation",
-            "Promotes clear thinking"
+            "Поддержание уровня энергии",
+            "Поддержка функции почек",
+            "Помощь в регулировании температуры",
+            "Способствует ясности мышления"
         ],
         "motivational_quote": "Water is the driving force of all nature. - Leonardo da Vinci"
     }
@@ -88,19 +88,19 @@ MISSION_EMOJIS = {
 
 # Default mission titles and descriptions
 MISSION_TITLES = {
-    "sleep": "Sleep Well Tonight",
-    "exercise": "Move Your Body",
-    "family": "Connect with Family",
-    "deep_work": "Deep Work Session",
-    "hydration": "Stay Hydrated"
+    "sleep": "Хорошо выспаться сегодня ночью",
+    "exercise": "Двигать телом",
+    "family": "Общение с семьей",
+    "deep_work": "Сессия глубокой работы",
+    "hydration": "Поддерживать гидратацию"
 }
 
 MISSION_DESCRIPTIONS = {
-    "sleep": "Prioritize quality sleep for optimal health and performance",
-    "exercise": "Engage in physical activity to boost your health",
-    "family": "Spend meaningful time with loved ones",
-    "deep_work": "Focus intensely on important tasks without distractions",
-    "hydration": "Drink enough water throughout the day"
+    "sleep": "Приоритет качества сна для оптимального здоровья и производительности",
+    "exercise": "Заниматься физической активностью для укрепления здоровья",
+    "family": "Проводить значимое время с близкими",
+    "deep_work": "Интенсивно сосредоточиться на важных задачах без отвлечений",
+    "hydration": "Пить достаточное количество воды в течение дня"
 }
 
 # Weekly analytics thresholds

@@ -122,7 +122,7 @@ class DatabaseManager:
             return True
         
         except Exception as e:
-            print(f"Error creating daily missions: {e}")
+            print(f"Ошибка создания ежедневных миссий: {e}")
             return False
         
         finally:
@@ -183,7 +183,7 @@ class DatabaseManager:
             return True
         
         except Exception as e:
-            print(f"Error starting timer: {e}")
+            print(f"Ошибка запуска таймера: {e}")
             return False
         
         finally:
@@ -220,7 +220,7 @@ class DatabaseManager:
             return True
         
         except Exception as e:
-            print(f"Error completing timer: {e}")
+            print(f"Ошибка завершения таймера: {e}")
             return False
         
         finally:
